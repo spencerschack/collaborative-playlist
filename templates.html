@@ -1,0 +1,112 @@
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+  <title>Collaborative Playlist</title>
+</head>
+
+<template name="rooms">
+<div class="rooms">
+  <ul>
+    {{#each this}}
+      {{> roomsItem}}
+    {{/each}}
+  </ul>
+  <input placeholder="Room Name" />
+  <button>Create Room</button>
+</div>
+</template>
+
+<template name="roomsItem">
+  <li>{{name}}</li>
+</template>
+
+<template name="room">
+<div class="room">
+  {{> search}}
+  {{> results}}
+  {{> playlist}}
+  {{> player}}
+</div>
+</template>
+
+<template name="playlist">
+<div class="playlist">
+  <ul>
+    {{#each songs}}
+      {{> playlistItem}}
+    {{/each}}
+  </ul>
+</div>
+</template>
+
+<template name="playlistItem">
+  <li class="{{selected}}">
+    <div class="title" onclick>{{title}}</div>
+    <div class="actions">
+      <div class="play" onclick>
+        <i class="fa fa-play"></i>
+      </div>
+      <div class="up" onclick>
+        <i class="fa fa-arrow-up"></i>
+      </div>
+      <div class="down" onclick>
+        <i class="fa fa-arrow-down"></i>
+      </div>
+      <div class="remove" onclick>
+        <i class="fa fa-remove"></i>
+      </div>
+    </div>
+  </li>
+</template>
+
+<template name="search">
+<div class="search">
+  <input placeholder="Search for songz" value="{{query}}" />
+</div>
+</template>
+
+<template name="results">
+{{#if query}}
+  <div class="results">
+    <ul>
+      {{#each results}}
+        {{> result}}
+      {{/each}}
+    </ul>
+  </div>
+{{/if}}
+</template>
+
+<template name="result">
+<div class="result">
+  <li>
+    {{title}}
+  </li>
+</div>
+</template>
+
+<template name="player">
+<div class="player">
+  <div class="play-pause" onclick>
+    {{#if playing}}
+      <i class="fa fa-pause"></i>
+    {{else}}
+      <i class="fa fa-play"></i>
+    {{/if}}
+  </div>
+  <div class="title">
+    {{#if currentSong}}
+      {{currentSong.title}}
+    {{else}}
+      (Nothing Playing)
+    {{/if}}
+  </div>
+  <div class="host">
+    {{#if hosting}}
+      <i class="fa fa-volume-up"></i>
+    {{else}}
+      <i class="fa fa-volume-off"></i>
+    {{/if}}
+  </div>
+</div>
+</template>
